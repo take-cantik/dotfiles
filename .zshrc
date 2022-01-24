@@ -18,7 +18,7 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-PROMPT="%{$fg[green]%} %~
+PROMPT="%{$fg[green]%} %~ %{${reset_color}%}
 $ "
 
 # 単語の区切り文字を指定する
