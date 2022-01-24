@@ -8,6 +8,7 @@
     di = diff
     ds = diff --staged
     fe = fetch
+    fp = fetch -p
     g = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
     ga = log --graph --decorate --oneline --all
     gg = log --all --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
