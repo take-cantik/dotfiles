@@ -6,6 +6,9 @@ export BAT_THEME="Monokai Extended Bright"
 autoload -Uz colors
 colors
 
+# エディタをvimに設定
+export EDITOR=vim
+
 # vi 風キーバインドにする
 bindkey -v
 
@@ -15,8 +18,8 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-PROMPT="%{${fg[green]}%}%{${reset_color}%} %~
-%# "
+PROMPT="%{$fg[green]%} %~
+$ "
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -152,4 +155,7 @@ if [ -d $ZSHHOME -a -r $ZSHHOME -a \
             [ \( -f $i -o -h $i \) -a -r $i ] && . $i
     done
 fi
+
+# nodebrew
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
