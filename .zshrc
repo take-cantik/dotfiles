@@ -159,3 +159,7 @@ fi
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
+# php
+export PATH="/usr/local/opt/php@8.0/bin:$PATH"
+export PATH="/usr/local/opt/php@8.0/sbin:$PATH"
+
