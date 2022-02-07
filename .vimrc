@@ -186,6 +186,7 @@ let g:previm_open_cmd = ''
 nnoremap [previm] <Nop>
 nmap <C-p> [previm]
 nnoremap <silent> [previm] :<C-u>PrevimOpen<CR>
+noremap <Space><CR> o<ESC>
 
 " Config for NERD Commenter
 let g:NERDSpaceDelims = 2
