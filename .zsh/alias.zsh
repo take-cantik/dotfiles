@@ -41,6 +41,7 @@ alias shutdown='shutdown -h now'
 alias sl='ls'
 alias vi='vim'
 alias emacs='vim'
+alias nyarn='yarn'
 
 # trash-cli
 # Clone from 'https://github.com/andreafrancia/trash-cli'
