@@ -178,3 +178,6 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="/usr/local/opt/php@8.0/bin:$PATH"
 export PATH="/usr/local/opt/php@8.0/sbin:$PATH"
 
+
+export PATH="$HOME/.poetry/bin:$PATH"
+export PATH=/usr/local/texlive/2021/bin/universal-darwin:$PATH
