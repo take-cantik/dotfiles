@@ -29,11 +29,33 @@ select-word-style default
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
 
-########################################
+# git
+# git-promptの読み込み
+source ~/.zsh/git-prompt.sh
+
+# git-completionの読み込み
+fpath=(~/.zsh $fpath)
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+
 # 補完
-# 補完機能を有効にする
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
+compinit -u
+
+# プロンプトのオプション表示設定
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUPSTREAM=auto
+
+# #を打つと\#に変換する
+function auto-escape() {
+  LBUFFER+="\\"
+  zle self-insert
+}
+
+zle -N auto-escape
+bindkey -v "#" auto-escape
+bindkey -v "^" auto-escape
 
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -48,6 +70,11 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
+# 補完に色を付ける
+zstyle ':completion:*' list-colors "${LS_COLORS}"
+
+# 補完候補をハイライト
+zstyle ':completion:*:default' menu select=1
 
 ########################################
 # vcs_info
@@ -155,21 +182,6 @@ if [ -d $ZSHHOME -a -r $ZSHHOME -a \
             [ \( -f $i -o -h $i \) -a -r $i ] && . $i
     done
 fi
-
-# git
-# git-promptの読み込み
-source ~/.zsh/git-prompt.sh
-
-# git-completionの読み込み
-fpath=(~/.zsh $fpath)
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-autoload -Uz compinit && compinit
-
-# プロンプトのオプション表示設定
-GIT_PS1_SHOWDIRTYSTATE=true
-GIT_PS1_SHOWUNTRACKEDFILES=true
-GIT_PS1_SHOWSTASHSTATE=true
-GIT_PS1_SHOWUPSTREAM=auto
 
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH

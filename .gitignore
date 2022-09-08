@@ -4,3 +4,5 @@ _git
 git-completion.bash
 git-prompt.sh
 
+**/.DS_Store/**
+
