@@ -11,7 +11,6 @@ endif
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 set backspace=indent,eol,start
 
-
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -67,6 +66,9 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'mxw/vim-jsx'
 
+" lightline
+NeoBundle 'itchyny/lightline.vim'
+
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
 
@@ -101,6 +103,27 @@ set showcmd
 " 見た目系
 " 行番号を表示
 set number
+
+" 画面左端にサイン列を常に表示
+set signcolumn=yes
+
+" 画面最下部に常にステータスラインを表示
+set laststatus=2
+
+" 画面最下部(ステータス行より下)のメッセージ表示欄を2行にする
+set cmdheight=2
+
+" タブ毎に常にタブラインを表示
+set showtabline=2
+
+" 矩形選択時に仮想編集を有効化
+set virtualedit=block
+
+" コマンドラインでTAB補完時に候補メニューを表示
+set wildmenu
+
+" コマンドラインでTAB補完時に大文字・小文字を区別しない
+set wildignorecase
 
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=onemore
@@ -153,6 +176,9 @@ set tabstop=2
 " 行頭でのTab文字の表示幅
 set shiftwidth=2
 
+" 新しい行追加時に自動でインデントを追加
+set smartindent
+
 
 " 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
@@ -169,6 +195,9 @@ set wrapscan
 
 " 検索語をハイライト表示
 set hlsearch
+
+" マウス操作を有効にする
+set mouse=a
 
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
