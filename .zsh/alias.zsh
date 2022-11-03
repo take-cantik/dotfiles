@@ -42,6 +42,7 @@ alias sl='ls'
 alias vi='vim'
 alias emacs='vim'
 alias nyarn='yarn'
+alias gbrda='git branch | xargs git branch -D'
 
 # trash-cli
 # Clone from 'https://github.com/andreafrancia/trash-cli'
