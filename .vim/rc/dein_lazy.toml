@@ -1,0 +1,5 @@
+[[plugins]]
+repo  = 'phpactor/phpactor'
+on_ft = ['php']
+build = 'composer install'
+

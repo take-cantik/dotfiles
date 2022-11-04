@@ -31,3 +31,15 @@ repo = 'bronson/vim-trailing-whitespace'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'lambdalisue/fern-git-status.vim'
+

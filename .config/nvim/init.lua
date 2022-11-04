@@ -50,11 +50,11 @@ if dein#check_install()
 endif
 
 " Show file tree with Ctrl+n
-nnoremap <C-n> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+nnoremap <C-n> :Fern . -reveal=% -drawer -toggle -width=30<CR>
 
 let g:fern#default_hidden=1 " 隠しファイルを表示する
 let g:fern#renderer = 'nerdfont'
-let g:fern#renderer#nerdfont#indent_markers = 1
+" let g:fern#renderer#nerdfont#indent_markers = 1
 
 "文字コードをUFT-8に設定
 set fenc=utf-8
