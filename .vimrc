@@ -11,75 +11,46 @@ endif
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 set backspace=indent,eol,start
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+" プラグインが実際にインストールされるディレクトリ
+let s:dein_dir = expand('~/.cache/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
 
-" My Bundles here:
-" Color settings
-" NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'jacoborus/tender.vim'
-NeoBundle 'freeo/vim-kalisi'
-NeoBundle 'dracula/vim'
+" 設定開始
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" Color scheme preview
-" How to Use
-" :Unite -auto-preview colorscheme
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
+  " プラグインリストを収めた TOML ファイル
+  " 予め TOML ファイル（後述）を用意しておく
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
-" Auto close parentheses
-" NeoBundle 'cohama/lexima.vim'
-NeoBundle 'Townk/vim-autoclose'
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-" C++ syntax highlighting
-NeoBundle 'vim-jp/vim-cpp'
-NeoBundle 'octol/vim-cpp-enhanced-highlight'
+  let g:fern#default_hidden=1 " 隠しファイルを表示する
+  let g:fern#renderer = 'nerdfont'
+  let g:fern#renderer#nerdfont#indent_markers = 1
 
-" Python auto-complete
-NeoBundle 'davidhalter/jedi-vim'
+  " 設定終了
+  call dein#end()
+  call dein#save_state()
+endif
 
-" MarkDown preview
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'kannokanno/previm'
-
-" For easy comment out
-" <leader>c<Space>
-NeoBundle 'scrooloose/nerdcommenter'
-
-" For ROS
-" NeoBundle "taketwo/vim-ros"
-
-" For Vue component
-NeoBundle 'storyn26383/vim-vue'
-
-" For rapid html editing
-NeoBundle 'mattn/emmet-vim'
-
-" Highlight whitespace on end of line
-NeoBundle 'bronson/vim-trailing-whitespace'
-
-" React
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'mxw/vim-jsx'
-
-" lightline
-NeoBundle 'itchyny/lightline.vim'
-
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
+" もし、未インストールものものがあったらインストール
+if dein#check_install()
+  call dein#install()
+endif
 
 "文字コードをUFT-8に設定
 set fenc=utf-8
@@ -98,7 +69,6 @@ set hidden
 
 " 入力中のコマンドをステータスに表示する
 set showcmd
-
 
 " 見た目系
 " 行番号を表示
@@ -198,6 +168,7 @@ set hlsearch
 
 " マウス操作を有効にする
 set mouse=a
+set ttymouse=xterm2
 
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
