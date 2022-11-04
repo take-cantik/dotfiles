@@ -3,6 +3,7 @@
 _git
 git-completion.bash
 git-prompt.sh
+.config/nvim/plugin/*
 
 **/.DS_Store
 .DS_Store
