@@ -46,6 +46,9 @@ return packer.startup(function(use)
 	use({ "nvim-lua/plenary.nvim" }) -- Common utilities
   use({ "vim-airline/vim-airline" })
   use({ "vim-airline/vim-airline-themes" })
+  use({'lambdalisue/fern.vim'})
+  use({'lambdalisue/nerdfont.vim'})
+  use({'lambdalisue/fern-renderer-nerdfont.vim'})
 
 	-- Colorschemes
 	use({ "EdenEast/nightfox.nvim" }) -- Color scheme
