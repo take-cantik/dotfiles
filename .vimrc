@@ -56,6 +56,11 @@ let g:fern#default_hidden=1 " 隠しファイルを表示する
 let g:fern#renderer = 'nerdfont'
 let g:fern#renderer#nerdfont#indent_markers = 1
 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'default'
+
 "文字コードをUFT-8に設定
 set fenc=utf-8
 
@@ -116,6 +121,12 @@ set laststatus=2
 
 " コマンドラインの補完
 set wildmode=list:longest
+
+" 新しいウィンドウを下に開く
+set splitbelow
+
+" 新しいウィンドウを右に開く
+set splitright
 
 " 折り返し時に表示行単位での移動できるようにする
 nnoremap j gj
@@ -228,4 +239,11 @@ function! NERDCommenter_after()
     let g:ft = ''
   endif
 endfunction
+
+" アイコンに色をつける
+augroup my-glyph-palette
+  autocmd! *
+  autocmd FileType fern call glyph_palette#apply()
+  autocmd FileType nerdtree,startify call glyph_palette#apply()
+augroup END
 

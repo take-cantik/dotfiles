@@ -43,3 +43,15 @@ repo = 'ryanoasis/vim-devicons'
 [[plugins]]
 repo = 'lambdalisue/fern-git-status.vim'
 
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'lambdalisue/glyph-palette.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
