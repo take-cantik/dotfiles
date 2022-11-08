@@ -182,8 +182,8 @@ set wrapscan
 set hlsearch
 
 " マウス操作を有効にする
-set mouse=a
-set ttymouse=xterm2
+" set mouse=a
+" set ttymouse=xterm2
 
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
