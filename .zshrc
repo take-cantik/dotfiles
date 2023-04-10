@@ -31,11 +31,11 @@ zstyle ':zle:*' word-style unspecified
 
 # git
 # git-promptの読み込み
-source ~/.zsh/git-prompt.sh
+source ~/.zsh/.git-prompt.sh
 
 # git-completionの読み込み
 fpath=(~/.zsh $fpath)
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+zstyle ':completion:*:*:git:*' script ~/.zsh/.git-completion.bash
 
 # 補完
 autoload -Uz compinit && compinit

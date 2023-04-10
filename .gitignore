@@ -1,8 +1,8 @@
 *.gitconfig.user*
 .vim/bundle/*
 _git
-git-completion.bash
-git-prompt.sh
+.git-completion.sh
+.git-prompt.sh
 .config/nvim/plugin/*
 
 **/.DS_Store
