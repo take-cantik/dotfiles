@@ -4,6 +4,6 @@ dotfiles=(.zshrc .gitconfig .gitconfig.user .gitmodules .vimrc .vim/ .zsh/)
 
 # 設定ファイルのシンボリックリンクをホームディレクトリ直下に作成する
 for file in "${dotfiles[@]}"; do
-  ln -sv ~/dotfiles/$file ~
+  ln -svf ~/works/dotfiles/$file ~
 done
 
