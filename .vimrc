@@ -191,6 +191,9 @@ set noerrorbells
 " gitmojiの設定
 set completefunc=emoji#complete
 
+" 置換コマンドの短縮
+cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 's'
+
 " Previm
 " Space-p で MarkDown のプレビュー
 
