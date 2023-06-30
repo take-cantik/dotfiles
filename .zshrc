@@ -197,3 +197,9 @@ export PATH=/usr/local/texlive/2021/bin/universal-darwin:$PATH
 export PATH=$PATH:/usr/local/bin
 export PATH="$HOME/.rbenv/bin:$PATH"
 
+# homebrew for M2 Mac
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# anyenv
+eval "$(anyenv init -)"
+
