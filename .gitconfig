@@ -5,6 +5,7 @@
     aa = add --all
     br = branch
     com = commit
+    cam = commit --amend
     di = diff
     ds = diff --staged
     fe = fetch
@@ -33,3 +34,4 @@
     ignorecase = false
 [pull]
     rebase = true
+
