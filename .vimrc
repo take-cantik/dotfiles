@@ -3,10 +3,6 @@
 " Note: Skip initialization for vim-tiny or vim-small.
 if 0 | endif
 
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
 " Required:
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 set backspace=indent,eol,start
@@ -191,6 +187,9 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " ビープの動作を無効化
 set visualbell t_vb=
 set noerrorbells
+
+" gitmojiの設定
+set completefunc=emoji#complete
 
 " Previm
 " Space-p で MarkDown のプレビュー
