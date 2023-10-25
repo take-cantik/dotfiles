@@ -20,12 +20,14 @@
     ls = log --stat
     pl = pull
     ps = push
+    psf = push -f
     rr = restore
     s = status
     sh = show
     st = stash
     sub-update = !git submodule foreach git pull origin master
     sw = switch
+    sc = switch -c
     unstage = !git add --all && git reset HEAD --hard
 [color]
     ui = auto
