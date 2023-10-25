@@ -56,5 +56,5 @@ repo = 'lambdalisue/glyph-palette.vim'
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
-repo = 'Kachyz/vim-gitmoji'
+repo = 'take-cantik/vim-gitmoji'
 
