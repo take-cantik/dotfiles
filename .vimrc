@@ -112,9 +112,6 @@ set visualbell
 " 括弧入力時の対応する括弧を表示
 set showmatch
 
-" ステータスラインを常に表示
-set laststatus=2
-
 " コマンドラインの補完
 set wildmode=list:longest
 
@@ -160,7 +157,6 @@ set shiftwidth=2
 " 新しい行追加時に自動でインデントを追加
 set smartindent
 
-
 " 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
 set ignorecase
@@ -193,6 +189,9 @@ set completefunc=emoji#complete
 
 " 置換コマンドの短縮
 cnoreabbrev <expr> s getcmdtype() .. getcmdline() ==# ':s' ? [getchar(), ''][1] .. "%s///g<Left><Left>" : 's'
+
+" jjでnormal modeにする
+inoremap <silent> jj <ESC>
 
 " Previm
 " Space-p で MarkDown のプレビュー
