@@ -11,6 +11,8 @@ export EDITOR=vim
 
 # vi 風キーバインドにする
 bindkey -v
+bindkey -M viins 'jj' vi-cmd-mode
+bindkey -v '^?' backward-delete-char
 
 # ヒストリの設定
 HISTFILE=~/.zsh_history
@@ -18,8 +20,18 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-PROMPT="%{$fg[green]%} %~ %{${reset_color}%}
-$ "
+VIMODE="[INS]"
+function zle-line-init zle-keymap-select {
+  VIMODE="${${KEYMAP/vicmd/${fg[yellow]}[NOR]${reset_color}}/(main|viins)/${fg[blue]}[INS]${reset_color}}"
+
+  PROMPT="%{$fg[green]%} %~ %{${reset_color}%}
+${VIMODE} $ "
+
+  zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -203,3 +215,18 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # anyenv
 eval "$(anyenv init -)"
 
+
+# bun completions
+[ -s "/Users/take_cantik/.bun/_bun" ] && source "/Users/take_cantik/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/take_cantik/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
