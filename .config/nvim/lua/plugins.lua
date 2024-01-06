@@ -44,14 +44,9 @@ return packer.startup(function(use)
 
 	use({ "wbthomason/packer.nvim" })
 	use({ "nvim-lua/plenary.nvim" }) -- Common utilities
-  use({ "vim-airline/vim-airline" })
-  use({ "vim-airline/vim-airline-themes" })
-  use({'lambdalisue/fern.vim'})
-  use({'lambdalisue/nerdfont.vim'})
-  use({'lambdalisue/fern-renderer-nerdfont.vim'})
 
 	-- Colorschemes
-	use({ "EdenEast/nightfox.nvim" }) -- Color scheme
+	use({ "folke/tokyonight.nvim" }) -- Color scheme
 
 	use({ "nvim-lualine/lualine.nvim" }) -- Statusline
 	use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
@@ -75,22 +70,132 @@ return packer.startup(function(use)
 	use({ "neovim/nvim-lspconfig" }) -- enable LSP
 	use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
 	use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
-	use({ "glepnir/lspsaga.nvim" }) -- LSP UIs
+	use({ "nvimdev/lspsaga.nvim" }) -- LSP UIs
 
 	-- Formatter
 	use({ "MunifTanjim/prettier.nvim" })
 
 	-- Telescope
+  use({ "nvim-lua/plenary.nvim" })
 	use({ "nvim-telescope/telescope.nvim" })
 
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" } })
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
 
+	use({ "windwp/nvim-ts-autotag" })
+
+  -- GitHub Copilot
+  use({
+    "github/copilot.vim",
+    config = function()
+      vim.g.copilot_no_tab_map = true
+
+      local keymap = vim.keymap.set
+      -- https://github.com/orgs/community/discussions/29817#discussioncomment-4217615
+      keymap(
+        "i",
+        "<Tab>",
+        'copilot#Accept("<CR>")',
+        { silent = true, expr = true, script = true, replace_keycodes = false }
+      )
+      keymap("i", "<C-j>", "<Plug>(copilot-next)")
+      keymap("i", "<C-k>", "<Plug>(copilot-previous)")
+      keymap("i", "<C-o>", "<Plug>(copilot-dismiss)")
+      keymap("i", "<C-s>", "<Plug>(copilot-suggest)")
+    end,
+  })
+
+  -- Coc
+  use({ "neoclide/coc.nvim", { branch = "release" } })
+
+  -- Fern
+  use({
+    "lambdalisue/fern.vim",
+    config = function()
+      vim.g['fern#default_hidden'] = 1
+      vim.g['fern#renderer'] = 'nerdfont'
+    end
+  })
+
+  use({ "lambdalisue/fern-git-status.vim" })
+  use({ "lambdalisue/nerdfont.vim" })
+  use({ "lambdalisue/fern-renderer-nerdfont.vim" })
+  use({ "lambdalisue/glyph-palette.vim" })
+
+
+  -- barbar
+  use({ "lewis6991/gitsigns.nvim" }) -- OPTIONAL: for git status
+  use({ "romgrk/barbar.nvim" })
+
+  -- float term
+  -- use({ "voldikss/vim-floaterm" })
+
+  -- toggleterm
+  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup{
+      size = 20,
+    }
+  end}
+
+  -- git
+  use({ "sindrets/diffview.nvim" })
+
+  -- lualine
+  use({
+    "nvim-lualine/lualine.nvim",
+    requires = { "nvim-tree/nvim-web-devicons", opt = true }
+  })
+
+  require('lualine').setup({
+    options = {
+      icons_enabled = true,
+      theme = 'tokyonight',
+      component_separators = { left = '', right = ''},
+      section_separators = { left = '', right = ''},
+      disabled_filetypes = {},
+      always_divide_middle = true,
+      globalstatus = false,
+    },
+    sections = {
+      lualine_a = {'mode'},
+      lualine_b = {'branch', 'diff', 'diagnostics'},
+      lualine_c = {{'filename', path = 1}},
+      lualine_x = {'encoding', 'fileformat', 'filetype'},
+      lualine_y = {'progress'},
+      lualine_z = {'location'}
+   },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {'filename'},
+      lualine_x = {'location'},
+      lualine_y = {},
+      lualine_z = {}
+    },
+    tabline = {},
+    extensions = {}
+  })
+
+  -- vim-surround
+  use({ "tpope/vim-surround" })
+
+  -- vim-visual-multi
+  use({ "mg979/vim-visual-multi",  branch = "master" })
+
+  -- Prettier
+  use({ "prettier/vim-prettier", run = "yarn install" })
+
+  -- Code Jump
+  use({ "pechorin/any-jump.vim" })
+
+  -- Gitmoji
+  use({ "take-cantik/vim-gitmoji" })
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
-	end
+  end
 end)
 
