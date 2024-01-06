@@ -21,14 +21,15 @@ local options = {
 	undofile = true,
 	updatetime = 300,
 	writebackup = false,
-	shell = "fish",
+	shell = "zsh",
 	backupskip = { "/tmp/*", "/private/tmp/*" },
 	expandtab = true,
 	shiftwidth = 2,
 	tabstop = 2,
 	cursorline = true,
+  cursorcolumn = true,
 	number = true,
-	relativenumber = false,
+	relativenumber = true,
 	numberwidth = 4,
 	signcolumn = "yes",
 	wrap = false,
@@ -41,6 +42,7 @@ local options = {
 	guifont = "monospace:h17",
 	splitbelow = false, -- オンのとき、ウィンドウを横分割すると新しいウィンドウはカレントウィンドウの下に開かれる
 	splitright = false, -- オンのとき、ウィンドウを縦分割すると新しいウィンドウはカレントウィンドウの右に開かれる
+  completefunc = "emoji#complete",
 }
 
 vim.opt.shortmess:append("c")
@@ -51,10 +53,12 @@ end
 
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
-
--- airline
-vim.g['airline#extensions#tabline#enabled'] = 1
-vim.g['airline#extensions#tabline#left_sep'] = ' '
-vim.g['airline#extensions#tabline#left_alt_sep'] = '|'
-vim.g['airline#extensions#tabline#formatter'] = 'default'
+vim.cmd([[set formatoptions-=cro]]) -- TODO: this doesn't seem to work
+vim.api.nvim_exec([[
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd BufRead,BufNewFile * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd BufRead,BufNewFile * match TrailingSpaces /\s\+$/
+augroup END
+]], false)
 
