@@ -113,7 +113,8 @@ keymap("n", "<C-t>", ":ToggleTerm<CR>", opts)
 keymap("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
 -- GitDiff
-keymap("n", ":GitDi", ":DiffviewOpen", opts)
+keymap("n", ":Gdo", ":DiffviewOpen", opts)
+keymap("n", ":Gdc", ":DiffviewClose", opts)
 
 -- Coc.nvim
 keymap("i", "<CR>", "coc#pum#visible() ? coc#pum#confirm() : '<CR>'", expr_opts)
