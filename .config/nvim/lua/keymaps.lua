@@ -117,10 +117,6 @@ keymap("i", "<CR>", "coc#pum#visible() ? coc#pum#confirm() : '<CR>'", expr_opts)
 keymap("i", "<C-j>", "coc#pum#visible() ? coc#pum#next() : '<C-j>'", expr_opts)
 keymap("i", "<C-k>", "coc#pum#visible() ? coc#pum#prev() : '<C-k>'", expr_opts)
 
--- LSP
--- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
--- keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-
 -- AnyJump
 keymap("n", "gd", "<cmd>AnyJump<CR>", opts)
 keymap("n", "gi", "<cmd>AnyJumpBack<CR>", opts)
