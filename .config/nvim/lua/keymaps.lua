@@ -120,3 +120,15 @@ keymap("i", "<C-k>", "coc#pum#visible() ? coc#pum#prev() : '<C-k>'", expr_opts)
 -- AnyJump
 keymap("n", "gd", "<cmd>AnyJump<CR>", opts)
 keymap("n", "gi", "<cmd>AnyJumpBack<CR>", opts)
+
+-- completion brackets and quote
+keymap("i", "'", "''<LEFT>", opts)
+keymap("i", '"', '""<LEFT>', opts)
+keymap("i", "`", "``<LEFT>", opts)
+keymap("i", "[", "[]<LEFT>", opts)
+keymap("i", "{", "{}<LEFT>", opts)
+keymap("i", "(", "()<LEFT>", opts)
+keymap("i", "<", "<><LEFT>", opts)
+keymap("i", "[<CR>", "[]<LEFT><CR><Esc><S-o>", opts)
+keymap("i", "{<CR>", "{}<LEFT><CR><Esc><S-o>", opts)
+keymap("i", "(<CR>", "()<LEFT><CR><Esc><S-o>", opts)
