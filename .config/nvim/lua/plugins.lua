@@ -150,6 +150,9 @@ return packer.startup(function(use)
   use({ "dinhhuy258/git.nvim" })
   require("git").setup()
 
+  use({ "lewis6991/gitsigns.nvim" })
+  require("gitsigns").setup()
+
   -- lualine
   use({
     "nvim-lualine/lualine.nvim",
