@@ -122,8 +122,35 @@ keymap("n", "gd", "<cmd>AnyJump<CR>", opts)
 keymap("n", "gi", "<cmd>AnyJumpBack<CR>", opts)
 
 -- completion brackets and quote
-keymap("i", "'", "''<LEFT>", opts)
+
+-- TODO: いい感じに実装
+-- function InsertParentheses(start_word, end_word)
+  -- カーソル位置の次の文字を取得
+  -- local current_line = vim.fn.getline('.')
+  -- local next_column = vim.fn.col('.') + 1
+
+  -- local next_char = current_line:sub(next_column, next_column)
+
+  -- カーソル位置の次が存在しない、または記号の時のみどちらも挿入する
+  -- if next_char == "" or string.match("[({'\"$ ", next_char) then
+  -- if next_char == "" then
+  --     -- return string.format("%s%s<Left>", start_word, end_word)
+  --     return "ahi"
+  -- else
+  --     return string.format("%s", start_word)
+  -- end
+-- end
+
+-- keymap("i", "'", InsertParentheses("'", "'"), opts)
+-- keymap("i", '"', InsertParentheses('"', '"'), opts)
+-- keymap("i", "`", InsertParentheses("`", "`"), opts)
+-- keymap("i", "[", InsertParentheses("[", "]"), opts)
+-- keymap("i", "{", InsertParentheses("{", "}"), opts)
+-- keymap("i", "(", InsertParentheses("(", ")"), opts)
+-- keymap("i", "<", InsertParenthesses("'", "'"), opts)
+
 keymap("i", '"', '""<LEFT>', opts)
+keymap("i", "'", "''<LEFT>", opts)
 keymap("i", "`", "``<LEFT>", opts)
 keymap("i", "[", "[]<LEFT>", opts)
 keymap("i", "{", "{}<LEFT>", opts)

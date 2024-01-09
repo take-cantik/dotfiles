@@ -93,6 +93,18 @@ return packer.startup(function(use)
 
 	use({ "windwp/nvim-ts-autotag" })
 
+  -- dashboard
+  use {
+    "nvimdev/dashboard-nvim",
+    event = 'VimEnter',
+    config = function()
+      require("dashboard").setup({
+        -- config
+      })
+    end,
+    requires = {"nvim-tree/nvim-web-devicons"}
+  }
+
   -- GitHub Copilot
   use({
     "github/copilot.vim",
