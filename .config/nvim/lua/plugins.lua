@@ -81,6 +81,14 @@ return packer.startup(function(use)
 
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" } })
+  require("nvim-treesitter.configs").setup({
+    auto_install = true,
+    highlight = {
+      enable = true,
+    },
+  })
+
+
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 	use({ "windwp/nvim-ts-autotag" })
@@ -191,6 +199,44 @@ return packer.startup(function(use)
 
   -- Gitmoji
   use({ "take-cantik/vim-gitmoji" })
+
+  -- mini.indent
+  use({
+    "echasnovski/mini.indentscope",
+    config = function()
+      require('mini.indentscope').setup()
+    end
+  })
+
+  -- command line
+  use({ "MunifTanjim/nui.nvim" })
+  use({ "rcarriga/nvim-notify" })
+  use({ "folke/noice.nvim" })
+  require("noice").setup({
+    cmdline = {
+      format = {
+        -- search iconの文字化け対策
+        search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+        search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+      },
+    },
+    lsp = {
+      -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
+      },
+    },
+    -- you can enable a preset for easier configuration
+    presets = {
+      bottom_search = false, -- use a classic bottom cmdline for search
+      command_palette = false, -- position the cmdline and popupmenu together
+      long_message_to_split = true, -- long messages will be sent to a split
+      inc_rename = false, -- enables an input dialog for inc-rename.nvim
+      lsp_doc_border = false, -- add a border to hover docs and signature help
+    },
+  })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
