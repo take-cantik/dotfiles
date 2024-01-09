@@ -43,13 +43,10 @@ return packer.startup(function(use)
 	-- My plugins here
 
 	use({ "wbthomason/packer.nvim" })
-	use({ "nvim-lua/plenary.nvim" }) -- Common utilities
 
 	-- Colorschemes
 	use({ "folke/tokyonight.nvim" }) -- Color scheme
 
-	use({ "nvim-lualine/lualine.nvim" }) -- Statusline
-	use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
 	use({ "kyazdani42/nvim-web-devicons" }) -- File icons
 	use({ "akinsho/bufferline.nvim" })
 
@@ -80,7 +77,10 @@ return packer.startup(function(use)
 	use({ "nvim-telescope/telescope.nvim" })
 
 	-- Treesitter
-	use({ "nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" } })
+	use({
+    "nvim-treesitter/nvim-treesitter",
+    { run = ":TSUpdate" }
+  })
   require("nvim-treesitter.configs").setup({
     auto_install = true,
     highlight = {
@@ -145,7 +145,6 @@ return packer.startup(function(use)
 
 
   -- barbar
-  use({ "lewis6991/gitsigns.nvim" }) -- OPTIONAL: for git status
   use({ "romgrk/barbar.nvim" })
 
   -- float term
@@ -206,9 +205,9 @@ return packer.startup(function(use)
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
+      require("nvim-surround").setup({
+          -- Configuration here, or leave empty to use defaults
+      })
     end
   })
 
@@ -260,6 +259,17 @@ return packer.startup(function(use)
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = false, -- add a border to hover docs and signature help
     },
+  })
+
+  -- Autopairs
+  use({
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup({
+        disable_filetype = { "TelescopePrompt" , "vim" },
+        { map_cr = true }
+      })
+    end
   })
 
 	-- Automatically set up your configuration after cloning packer.nvim
