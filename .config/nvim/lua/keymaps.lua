@@ -112,10 +112,6 @@ keymap("n", "<C-f>", ":Telescope live_grep<CR>", opts)
 keymap("n", "<C-t>", ":ToggleTerm<CR>", opts)
 keymap("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
--- GitDiff
-keymap("n", ":Gdo", ":DiffviewOpen", opts)
-keymap("n", ":Gdc", ":DiffviewClose", opts)
-
 -- Coc.nvim
 keymap("i", "<CR>", "coc#pum#visible() ? coc#pum#confirm() : '<CR>'", expr_opts)
 keymap("i", "<C-j>", "coc#pum#visible() ? coc#pum#next() : '<C-j>'", expr_opts)
@@ -128,4 +124,3 @@ keymap("i", "<C-k>", "coc#pum#visible() ? coc#pum#prev() : '<C-k>'", expr_opts)
 -- AnyJump
 keymap("n", "gd", "<cmd>AnyJump<CR>", opts)
 keymap("n", "gi", "<cmd>AnyJumpBack<CR>", opts)
-

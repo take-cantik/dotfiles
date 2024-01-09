@@ -147,7 +147,8 @@ return packer.startup(function(use)
   end}
 
   -- git
-  use({ "sindrets/diffview.nvim" })
+  use({ "dinhhuy258/git.nvim" })
+  require("git").setup()
 
   -- lualine
   use({
