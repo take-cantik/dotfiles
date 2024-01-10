@@ -73,6 +73,13 @@ keymap("v", ">", ">gv", opts)
 -- ビジュアルモード時vで行末まで選択
 keymap("v", "v", "$h", opts)
 
+-- LSP Global mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float<CR>", opts)
+keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev<CR>", opts)
+keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next<CR>", opts)
+keymap("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist<CR>", opts)
+
 -- Fern.nvimの設定
 keymap("n", "<C-b>", ":Fern . -reveal=% -drawer -toggle -width=40<CR>", opts)
 
@@ -124,8 +131,8 @@ keymap("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 -- keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], expr_opts)
 
 -- AnyJump
-keymap("n", "gd", "<cmd>AnyJump<CR>", opts)
-keymap("n", "gi", "<cmd>AnyJumpBack<CR>", opts)
+-- keymap("n", "gd", "<cmd>AnyJump<CR>", opts)
+-- keymap("n", "gi", "<cmd>AnyJumpBack<CR>", opts)
 
 -- -- completion brackets
 -- function InsertParentheses(start_word, end_word)

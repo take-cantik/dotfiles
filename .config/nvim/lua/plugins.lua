@@ -65,6 +65,26 @@ return packer.startup(function(use)
 
 	-- LSP
 	use({ "neovim/nvim-lspconfig" }) -- enable LSP
+  -- Setup language servers.
+  local lspconfig = require('lspconfig')
+  lspconfig.ansiblels.setup {}
+  lspconfig.cssls.setup {}
+  lspconfig.cssmodules_ls.setup {}
+  lspconfig.dockerls.setup {}
+  lspconfig.dotls.setup {}
+  lspconfig.eslint.setup {}
+  lspconfig.jsonls.setup {}
+  -- lspconfig.sumneko_lua.setup {}
+  -- lspconfig.nginx_language_server.setup {}
+  lspconfig.phpactor.setup {}
+  -- lspconfig.postgres_lsp.setup {}
+  lspconfig.prismals.setup {}
+  lspconfig.pyright.setup {}
+  lspconfig.sqlls.setup {}
+  lspconfig.tailwindcss.setup {}
+  lspconfig.terraform_lsp.setup {}
+  lspconfig.tsserver.setup {}
+
 	use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
 	use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
 	use({ "nvimdev/lspsaga.nvim" }) -- LSP UIs
