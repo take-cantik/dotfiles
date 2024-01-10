@@ -1,5 +1,5 @@
 local opts = { noremap = true, silent = true }
-local expr_opts = { expr = true, noremap = true, silent = true }
+local expr_opts = { expr = true, noremap = true, silent = true, replace_keycodes = false }
 local term_opts = { silent = true }
 
 --local keymap = vim.keymap
@@ -113,9 +113,15 @@ keymap("n", "<C-t>", ":ToggleTerm<CR>", opts)
 keymap("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
 -- Coc.nvim
-keymap("i", "<CR>", "coc#pum#visible() ? coc#pum#confirm() : '<CR>'", expr_opts)
-keymap("i", "<C-j>", "coc#pum#visible() ? coc#pum#next() : '<C-j>'", expr_opts)
-keymap("i", "<C-k>", "coc#pum#visible() ? coc#pum#prev() : '<C-k>'", expr_opts)
+-- Autocomplete
+-- function _G.check_back_space()
+--     local col = vim.fn.col('.') - 1
+--     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+-- end
+
+-- keymap("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], expr_opts)
+-- keymap("i", "<TAB>", "coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? '<TAB>' : coc#refresh()", expr_opts)
+-- keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], expr_opts)
 
 -- AnyJump
 keymap("n", "gd", "<cmd>AnyJump<CR>", opts)

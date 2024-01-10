@@ -127,7 +127,7 @@ return packer.startup(function(use)
   })
 
   -- Coc
-  use({ "neoclide/coc.nvim", { branch = "release" } })
+  -- use({ "neoclide/coc.nvim", { branch = "release" } })
 
   -- Fern
   use({
