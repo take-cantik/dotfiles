@@ -52,6 +52,16 @@ return packer.startup(function(use)
 
 	-- cmp plugins
 	use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
+	use({ "hrsh7th/cmp-vsnip" })
+	use({ "hrsh7th/vim-vsnip" })
+	use({ "hrsh7th/cmp-buffer" }) -- buffer completions
+	use({ "hrsh7th/cmp-path" }) -- path completions
+	use({ "hrsh7th/cmp-cmdline" }) -- cmdline completions
+	use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
+	use({ "hrsh7th/cmp-nvim-lsp" })
+	use({ "hrsh7th/cmp-nvim-lua" })
+	use({ "onsails/lspkind-nvim" })
+
   local cmp = require("cmp")
   cmp.setup({
     snippet = {
@@ -61,8 +71,9 @@ return packer.startup(function(use)
     },
     sources = {
       { name = "nvim_lsp" },
-      -- { name = "buffer" },
-      -- { name = "path" },
+      { name = "vsnip" },
+      { name = "buffer" },
+      { name = "path" },
     },
     mapping = cmp.mapping.preset.insert({
       ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -71,18 +82,7 @@ return packer.startup(function(use)
       ['<C-e>'] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping.confirm { select = true },
     }),
-    experimental = {
-      ghost_text = true,
-    },
   })
-
-	use({ "hrsh7th/cmp-buffer" }) -- buffer completions
-	use({ "hrsh7th/cmp-path" }) -- path completions
-	use({ "hrsh7th/cmp-cmdline" }) -- cmdline completions
-	use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
-	use({ "hrsh7th/cmp-nvim-lsp" })
-	use({ "hrsh7th/cmp-nvim-lua" })
-	use({ "onsails/lspkind-nvim" })
 
 	-- snippets
 	use({ "L3MON4D3/LuaSnip" }) --snippet engine
@@ -90,33 +90,16 @@ return packer.startup(function(use)
 	-- LSP
 	use({ "neovim/nvim-lspconfig" }) -- enable LSP
 
-  -- Setup language servers.
-  -- local lspconfig = require('lspconfig')
-  -- lspconfig.ansiblels.setup {}
-  -- lspconfig.cssls.setup {}
-  -- lspconfig.cssmodules_ls.setup {}
-  -- lspconfig.dockerls.setup {}
-  -- lspconfig.dotls.setup {}
-  -- lspconfig.eslint.setup {}
-  -- lspconfig.jsonls.setup {}
-  -- lspconfig.phpactor.setup {}
-  -- lspconfig.prismals.setup {}
-  -- lspconfig.pyright.setup {}
-  -- lspconfig.sqlls.setup {}
-  -- lspconfig.tailwindcss.setup {}
-  -- lspconfig.terraform_lsp.setup {}
-  -- lspconfig.tsserver.setup {}
-
 	use({ "williamboman/mason.nvim" })
 	use({ "williamboman/mason-lspconfig.nvim" })
   require('mason').setup()
   require('mason-lspconfig').setup_handlers({ function(server)
     local opt = {
-      -- -- Function executed when the LSP server startup
+      -- Function executed when the LSP server startup
       -- on_attach = function(client, bufnr)
-      --   local opts = { noremap=true, silent=true }
-      --   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-      --   vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)'
+        -- local opts = { noremap=true, silent=true }
+        -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        -- vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)'
       -- end,
       capabilities = require('cmp_nvim_lsp').update_capabilities(
         vim.lsp.protocol.make_client_capabilities()
@@ -125,23 +108,24 @@ return packer.startup(function(use)
     require('lspconfig')[server].setup(opt)
   end })
 
-  -- LSP handlers
-  -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  --   vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
-  -- )
-
-  -- Reference highlight
+  -- Only highlight if compatible with the language
   vim.cmd [[
     set updatetime=500
-    highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#B00000 guibg=#104040
-    highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#B00000 guibg=#104040
-    highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#B00000 guibg=#104040
-    augroup lsp_document_highlight
+    highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
+    highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
+    highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
+    augroup lsp_document_highlighgtt
       autocmd!
-      autocmd CursorHold,CursorHoldI * lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved,CursorMovedI * lua vim.lsp.buf.clear_references()
+      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
     augroup END
   ]]
+
+  -- LSP handlers
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+  )
+
 
 	use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
 	use({ "nvimdev/lspsaga.nvim" }) -- LSP UIs
