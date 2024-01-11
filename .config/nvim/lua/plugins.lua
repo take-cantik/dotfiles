@@ -52,6 +52,30 @@ return packer.startup(function(use)
 
 	-- cmp plugins
 	use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
+  local cmp = require("cmp")
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    sources = {
+      { name = "nvim_lsp" },
+      -- { name = "buffer" },
+      -- { name = "path" },
+    },
+    mapping = cmp.mapping.preset.insert({
+      ["<C-p>"] = cmp.mapping.select_prev_item(),
+      ["<C-n>"] = cmp.mapping.select_next_item(),
+      ['<C-l>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ["<CR>"] = cmp.mapping.confirm { select = true },
+    }),
+    experimental = {
+      ghost_text = true,
+    },
+  })
+
 	use({ "hrsh7th/cmp-buffer" }) -- buffer completions
 	use({ "hrsh7th/cmp-path" }) -- path completions
 	use({ "hrsh7th/cmp-cmdline" }) -- cmdline completions
@@ -65,27 +89,60 @@ return packer.startup(function(use)
 
 	-- LSP
 	use({ "neovim/nvim-lspconfig" }) -- enable LSP
-  -- Setup language servers.
-  local lspconfig = require('lspconfig')
-  lspconfig.ansiblels.setup {}
-  lspconfig.cssls.setup {}
-  lspconfig.cssmodules_ls.setup {}
-  lspconfig.dockerls.setup {}
-  lspconfig.dotls.setup {}
-  lspconfig.eslint.setup {}
-  lspconfig.jsonls.setup {}
-  -- lspconfig.sumneko_lua.setup {}
-  -- lspconfig.nginx_language_server.setup {}
-  lspconfig.phpactor.setup {}
-  -- lspconfig.postgres_lsp.setup {}
-  lspconfig.prismals.setup {}
-  lspconfig.pyright.setup {}
-  lspconfig.sqlls.setup {}
-  lspconfig.tailwindcss.setup {}
-  lspconfig.terraform_lsp.setup {}
-  lspconfig.tsserver.setup {}
 
-	use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
+  -- Setup language servers.
+  -- local lspconfig = require('lspconfig')
+  -- lspconfig.ansiblels.setup {}
+  -- lspconfig.cssls.setup {}
+  -- lspconfig.cssmodules_ls.setup {}
+  -- lspconfig.dockerls.setup {}
+  -- lspconfig.dotls.setup {}
+  -- lspconfig.eslint.setup {}
+  -- lspconfig.jsonls.setup {}
+  -- lspconfig.phpactor.setup {}
+  -- lspconfig.prismals.setup {}
+  -- lspconfig.pyright.setup {}
+  -- lspconfig.sqlls.setup {}
+  -- lspconfig.tailwindcss.setup {}
+  -- lspconfig.terraform_lsp.setup {}
+  -- lspconfig.tsserver.setup {}
+
+	use({ "williamboman/mason.nvim" })
+	use({ "williamboman/mason-lspconfig.nvim" })
+  require('mason').setup()
+  require('mason-lspconfig').setup_handlers({ function(server)
+    local opt = {
+      -- -- Function executed when the LSP server startup
+      -- on_attach = function(client, bufnr)
+      --   local opts = { noremap=true, silent=true }
+      --   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      --   vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)'
+      -- end,
+      capabilities = require('cmp_nvim_lsp').update_capabilities(
+        vim.lsp.protocol.make_client_capabilities()
+      )
+    }
+    require('lspconfig')[server].setup(opt)
+  end })
+
+  -- LSP handlers
+  -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  --   vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+  -- )
+
+  -- Reference highlight
+  vim.cmd [[
+    set updatetime=500
+    highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#B00000 guibg=#104040
+    highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#B00000 guibg=#104040
+    highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#B00000 guibg=#104040
+    augroup lsp_document_highlight
+      autocmd!
+      autocmd CursorHold,CursorHoldI * lua vim.lsp.buf.document_highlight()
+      autocmd CursorMoved,CursorMovedI * lua vim.lsp.buf.clear_references()
+    augroup END
+  ]]
+
 	use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
 	use({ "nvimdev/lspsaga.nvim" }) -- LSP UIs
 

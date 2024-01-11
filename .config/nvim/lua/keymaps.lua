@@ -73,12 +73,19 @@ keymap("v", ">", ">gv", opts)
 -- ビジュアルモード時vで行末まで選択
 keymap("v", "v", "$h", opts)
 
--- LSP Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float<CR>", opts)
-keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev<CR>", opts)
-keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next<CR>", opts)
-keymap("n", "<space>q", "<cmd>lua vim.diagnostic.setloclist<CR>", opts)
+-- LSP
+keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+keymap("n", "gf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+keymap("n", "gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+keymap("n", "gn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+keymap("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+keymap("n", "ge", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+keymap("n", "g]", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+keymap("n", "g[", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 
 -- Fern.nvimの設定
 keymap("n", "<C-b>", ":Fern . -reveal=% -drawer -toggle -width=40<CR>", opts)
