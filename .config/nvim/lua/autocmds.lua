@@ -21,3 +21,5 @@ autocmd({ "BufReadPost" }, {
 	end,
 })
 
+vim.cmd("autocmd BufNewFile,BufRead *.tf set filetype=terraform")
+
