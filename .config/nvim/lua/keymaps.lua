@@ -73,6 +73,9 @@ keymap("v", ">", ">gv", opts)
 -- ビジュアルモード時vで行末まで選択
 keymap("v", "v", "$h", opts)
 
+-- Terminal --
+keymap("t", "<Esc>", "<C-\\><C-n>", opts)
+
 -- LSP
 keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 keymap("n", "gf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
