@@ -96,11 +96,25 @@ return packer.startup(function(use)
   require('mason-lspconfig').setup_handlers({ function(server)
     local opt = {
       -- Function executed when the LSP server startup
-      -- on_attach = function(client, bufnr)
+      on_attach = function(client, bufnr)
         -- local opts = { noremap=true, silent=true }
         -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
         -- vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)'
-      -- end,
+
+        -- Only highlight if compatible with the language
+        if client.resolved_capabilities.document_highlighting then
+          vim.cmd [[
+            highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
+            highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
+            highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
+            augroup lsp_document_highlighgt
+              autocmd!
+              autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+              autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+            augroup END
+          ]]
+        end
+      end,
       capabilities = require('cmp_nvim_lsp').update_capabilities(
         vim.lsp.protocol.make_client_capabilities()
       )
@@ -109,21 +123,23 @@ return packer.startup(function(use)
   end })
 
   -- Only highlight if compatible with the language
-  vim.cmd [[
-    set updatetime=500
-    highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
-    highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
-    highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
-    augroup lsp_document_highlighgtt
-      autocmd!
-      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-  ]]
+
+  -- vim.cmd [[
+  --   set updatetime=500
+  --   highlight LspReferenceText  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
+  --   highlight LspReferenceRead  cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
+  --   highlight LspReferenceWrite cterm=underline ctermfg=1 ctermbg=8 gui=underline guifg=#ff4499 guibg=#00332a
+  --   augroup lsp_document_highlighgt
+  --     autocmd!
+  --     autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+  --     autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+  --   augroup END
+  -- ]]
 
   -- LSP handlers
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+    -- vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
+    vim.lsp.diagnostic.on_publish_diagnostics, { }
   )
 
 
