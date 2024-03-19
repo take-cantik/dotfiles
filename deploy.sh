@@ -16,7 +16,7 @@ for folder in "${dotfolders[@]}"; do
 done
 
 #.config以下の設定ファイルを配置する
-configfolders=(nvim/ gh/)
+configfolders=(nvim/ gh/ alacritty/)
 
 for folder in "${configfolders[@]}"; do
   sudo ln -svf ${PWD}/.config/"$folder" ~/.config
