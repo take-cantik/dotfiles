@@ -115,7 +115,7 @@ return packer.startup(function(use)
           ]]
         end
       end,
-      capabilities = require('cmp_nvim_lsp').update_capabilities(
+      capabilities = require('cmp_nvim_lsp').default_capabilities(
         vim.lsp.protocol.make_client_capabilities()
       )
     }
@@ -331,6 +331,10 @@ return packer.startup(function(use)
   -- command line
   use({ "MunifTanjim/nui.nvim" })
   use({ "rcarriga/nvim-notify" })
+  require("notify").setup({
+    background_colour = "#000000",
+  })
+
   use({ "folke/noice.nvim" })
   require("noice").setup({
     cmdline = {

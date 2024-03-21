@@ -126,7 +126,7 @@ keymap("n", "<C-p>", ":Telescope find_files hidden=true<CR>", opts)
 keymap("n", "<C-f>", ":Telescope live_grep<CR>", opts)
 
 -- floaterm.nvim
-keymap("n", "<C-t>", ":ToggleTerm<CR>", opts)
+keymap("n", "<C-t>", ":ToggleTerm direction=float<CR>", opts)
 keymap("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", opts)
 
 -- Coc.nvim
