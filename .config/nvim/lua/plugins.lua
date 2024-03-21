@@ -153,6 +153,26 @@ return packer.startup(function(use)
   use({ "nvim-lua/plenary.nvim" })
 	use({ "nvim-telescope/telescope.nvim" })
 
+  require("telescope").setup({
+    defaults = {
+      file_ignore_patterns = {
+        "node_modules/",
+        ".git/",
+        ".cache/",
+      },
+      vimgrep_arguments = {
+        "rg",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case",
+        "-uu",
+      },
+    },
+  })
+
 	-- Treesitter
 	use({
     "nvim-treesitter/nvim-treesitter",

@@ -122,7 +122,7 @@ keymap("n", "<Space>p", ":BufferPin<CR>", opts)
 keymap("n", "<Space>c", ":BufferClose<CR>", opts)
 
 -- telescope.nvim
-keymap("n", "<C-p>", ":Telescope find_files<CR>", opts)
+keymap("n", "<C-p>", ":Telescope find_files hidden=true<CR>", opts)
 keymap("n", "<C-f>", ":Telescope live_grep<CR>", opts)
 
 -- floaterm.nvim
