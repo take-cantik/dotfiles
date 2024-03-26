@@ -33,12 +33,13 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-VIMODE="[INS]"
 function zle-line-init zle-keymap-select {
-  VIMODE="${${KEYMAP/vicmd/${fg[yellow]}[NOR]${reset_color}}/(main|viins)/${fg[blue]}[INS]${reset_color}}"
+  VIM_NORMAL="%F{yellow}[NOR]%f"
+  VIM_INSERT="%F{blue}[INS]%f"
+  VIM_MODE="${${KEYMAP/vicmd/$VIM_NORMAL}/(main|viins)/$VIM_INSERT}"
 
   PROMPT="%{$fg[green]%} %~ %{${reset_color}%}
-${VIMODE} $ "
+${VIM_MODE} $ "
 
   zle reset-prompt
 }
@@ -46,7 +47,7 @@ ${VIMODE} $ "
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# #を打つと\#に変換する
+# バクスラを自動で入力
 function auto-escape() {
   LBUFFER+="\\"
   zle self-insert
@@ -97,19 +98,15 @@ setopt hist_reduce_blanks
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
 
-
-
-# nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-
 # php
 export PATH="/usr/local/opt/php@8.0/bin:$PATH"
 export PATH="/usr/local/opt/php@8.0/sbin:$PATH"
 
-
+# poetry
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH=/usr/local/texlive/2021/bin/universal-darwin:$PATH
 
+# rbenv
 export PATH=$PATH:/usr/local/bin
 export PATH="$HOME/.rbenv/bin:$PATH"
 
@@ -118,7 +115,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # anyenv
 eval "$(anyenv init -)"
-
 
 # bun completions
 [ -s "/Users/take_cantik/.bun/_bun" ] && source "/Users/take_cantik/.bun/_bun"
@@ -133,4 +129,3 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
