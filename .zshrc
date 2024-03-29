@@ -32,21 +32,6 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-# プロンプト
-function zle-line-init zle-keymap-select {
-  VIM_NORMAL="%F{yellow}[NOR]%f"
-  VIM_INSERT="%F{blue}[INS]%f"
-  VIM_MODE="${${KEYMAP/vicmd/$VIM_NORMAL}/(main|viins)/$VIM_INSERT}"
-
-  PROMPT="%{$fg[green]%} %~ %{${reset_color}%}
-${VIM_MODE} $ "
-
-  zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
 # バクスラを自動で入力
 function auto-escape() {
   LBUFFER+="\\"
