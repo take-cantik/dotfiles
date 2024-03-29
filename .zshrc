@@ -14,11 +14,6 @@ fi
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
 
-# 色を使用出来るようにする
-export BAT_THEME="Monokai Extended Bright"
-autoload -Uz colors
-colors
-
 # エディタをvimに設定
 export EDITOR=vim
 
