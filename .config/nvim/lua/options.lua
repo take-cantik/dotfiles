@@ -15,6 +15,7 @@ local options = {
 	showtabline = 2,
 	smartcase = true,
 	smartindent = true,
+  smarttab = true,
 	swapfile = false,
 	termguicolors = true,
 	timeoutlen = 300,
